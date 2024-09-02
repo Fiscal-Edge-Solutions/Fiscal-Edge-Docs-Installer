@@ -1,3 +1,6 @@
+----------------------------------------------------
+--FiscalInfo table to track fiscalised invoices
+----------------------------------------------------
 CREATE TABLE FiscalInfo(
        Id INT IDENTITY (1, 1) NOT NULL,
        InvoiceNumber nvarchar(50),
@@ -8,6 +11,10 @@ CREATE TABLE FiscalInfo(
 CREATE INDEX idx_FiscalInfo_InvoiceNumber ON FiscalInfo (InvoiceNumber);
 
 
+
+-----------------------------------------------------------
+--ZraInvoice view to extract invoices for fiscalization
+-----------------------------------------------------------
 CREATE VIEW [dbo].[ZraInvoice] 
 AS
  
@@ -84,6 +91,9 @@ AND Fisc.InvoiceNumber IS NULL
 GO
 
 
+-----------------------------------------------------------
+--GetZraInvoiceItem view to extract invoice line items
+-----------------------------------------------------------
 CREATE PROCEDURE GetZraInvoiceItem(@RefId VARCHAR(50))
 AS
 BEGIN
@@ -129,6 +139,10 @@ WHERE iInvoiceID = @RefId AND It.iOrigLineID = 0 AND fQtyProcessed != 0
 END
 
 
+
+-----------------------------------------------------------
+--ZraStockMaster view to extract inventory items
+-----------------------------------------------------------
 CREATE VIEW [dbo].[ZraStockMaster] AS
 SELECT 
 	St.Code AS ITEMCODE,
@@ -152,6 +166,9 @@ LEFT JOIN TaxRate Tr ON Tr.idTaxRate = St.TTInvID
 GO
 
 
+-----------------------------------------------------------
+--UpdateFiscalDetails Stored Proc to insert fiscal details
+-----------------------------------------------------------
 CREATE PROCEDURE [dbo].[UpdateFiscalDetails]
     @Signature NVARCHAR(255),
     @InternalData NVARCHAR(255),
@@ -168,6 +185,10 @@ BEGIN
 END;
 
 
+
+-----------------------------------------------------------
+----PurchaseInfo table to track fiscalised invoices
+-----------------------------------------------------------
 CREATE TABLE [dbo].[PurchaseInfo](
 		[Id] [int] IDENTITY(1,1) NOT NULL,
 		[InvoiceNumber] [nvarchar](50) NULL,
@@ -178,6 +199,9 @@ CREATE TABLE [dbo].[PurchaseInfo](
 CREATE INDEX idx_PurchaseInfo_InvoiceNumber ON FiscalInfo (InvoiceNumber);
 
 
+-----------------------------------------------------------
+----ZraPurchase view to extract purchases
+-----------------------------------------------------------
 CREATE VIEW [dbo].[ZraPurchase] 
 AS
 SELECT TOP 5
@@ -221,6 +245,9 @@ AND Inv.InvDate > '2024-06-30 00:00:00'  --This acts a cutoff. you want to set t
 GO
 
 
+-----------------------------------------------------------
+--GetZraPurchaseItem view to extract purchase line items
+-----------------------------------------------------------
 CREATE PROCEDURE GetZraPurchaseItem(@RefId VARCHAR(50))
 AS
 BEGIN
