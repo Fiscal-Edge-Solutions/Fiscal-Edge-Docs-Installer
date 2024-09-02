@@ -7,6 +7,7 @@ This repository contains installation guides, scripts, and installers related to
 ## Contents
 
 - **[32_version_1.4.5.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_1.4.5.zip)**: Installer package for version 1.4.5.
+- **[32_version_1.4.5.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Invoicing%20Rules.pdf)**: Contains an invoicing guide mandated by the ZRA to ensure compliance with Smart Invoice regulations. It is highly recommended for distribution to taxpayers.
 - **[Pastel Installation Guide.pdf](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Pastel%20Installation%20Guide.pdf)**: A detailed guide for installing Pastel software.
 - **[Pastel.sql](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Pastel.sql)**: SQL script related to the Pastel software.
 - **[README.md](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/README.md)**: This file, providing an overview of the repository and its contents.
