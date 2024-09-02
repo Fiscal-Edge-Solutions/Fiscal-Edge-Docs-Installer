@@ -205,7 +205,7 @@ CREATE INDEX idx_PurchaseInfo_InvoiceNumber ON FiscalInfo (InvoiceNumber);
 CREATE VIEW [dbo].[ZraPurchase] 
 AS
 SELECT TOP 5
-	'local' AS Origin,
+	COALESCE(AP.ulidpordOrigin, AP.ulIDGrvOrigin, null) AS Origin,
 	CAST(Inv.AutoIndex AS VARCHAR(20)) AS Id,
 	COALESCE(NULLIF(Inv.InvNumber, ''), Inv.GrvNumber) AS InvoiceNumber,
 	COALESCE(NULLIF(Inv.InvNumber, ''), Inv.GrvNumber) AS SupplierInvoiceNumber,
