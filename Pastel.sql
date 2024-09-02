@@ -43,7 +43,7 @@ SELECT TOP 1
         WHEN Header.DocumentType = 4 THEN 'R'
     END AS ReceiptTypeCode,
     '01' AS PaymentTypeCode,
-    CASE 
+    CASE --Please make sure this foreign currencies aligns with those configured in the users system
         WHEN Header.CurrencyCode = 1 THEN 'USD'
         WHEN Header.CurrencyCode = 2 THEN 'ZAR'
         WHEN Header.CurrencyCode = 3 THEN 'GBP'
