@@ -77,13 +77,7 @@ SELECT
 	COALESCE(NULLIF(I.UnitSize, ''), 'EA') AS PackagingUnitCode, 
 	COALESCE(NULLIF(I.UserdefText01, ''), 'NO') AS QuantityUnitCode, 
 	St.OnHand as Quantity,
-	CASE
-	    WHEN I.SalesTaxType = 1 THEN 'A'
-	    WHEN I.SalesTaxType = 2 THEN 'C1'
-	    WHEN I.SalesTaxType = 3 THEN 'C2'
-	    WHEN I.SalesTaxType = 4 THEN 'C3'
-	    WHEN I.SalesTaxType = 5 THEN 'D'
-	END AS TaxLabel,
+	'A' AS TaxLabel,
 	COALESCE(NULLIF(I.CommodityCode, ''), 'ZM') AS OriginNationCode, 
 	CASE
 		WHEN I.Physical = 0 THEN '3'
