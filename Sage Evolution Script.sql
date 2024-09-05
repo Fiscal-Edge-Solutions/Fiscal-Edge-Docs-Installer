@@ -159,7 +159,8 @@ SELECT
 		WHEN QtyInStock IS NULL THEN 0
 		ELSE CAST(QtyInStock AS DECIMAL(18,4))
 	END AS Quantity,
-	Tr.cFiscalTaxLabel AS TaxLabel
+	Tr.cFiscalTaxLabel AS TaxLabel,
+	'000' AS BranchId
 FROM _bvStockFull St
 WITH (NOLOCK)
 LEFT JOIN TaxRate Tr ON Tr.idTaxRate = St.TTInvID
