@@ -1,0 +1,68 @@
+{
+  "PosConfigs": [
+    {
+      "ConnectionString": "DSN=test;",
+      "APIKey": "lVilgqBJq/NBseSSSjUYu0fsD40KFnCRQ3TSi+ZNj5g=",
+      "TerminalId": "SDC0060000006",
+      "BranchId": "000",
+      "PastelTaxMapping": {
+        "1": "A",
+        "2": "B",
+        "3": "A",
+        "14": "A"
+      }
+    }
+  ],
+
+  "AppConfigs": {
+    "AppUrl": "https://localhost:7210/zm/api/",
+    "Pos": "pastel",
+    "InvoiceFrequency": 5,
+    "StockSync": true,
+    "StockFrequency": 1440,
+    "PurchaseFrequency": 31,
+    "HDBDOTNETCORE": "C:\\Users\\Terry\\Downloads\\dotnetcore"
+  },
+
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File" ],
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    },
+    "WriteTo": [
+      {
+        "Name": "Console"
+      },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "C:\\Home\\RawLogs\\fiscalize.txt",
+          "rollingInterval": "Day",
+          "retainedFileCountLimit": "2",
+          "shared": "true",
+          "flushToDiskInterval": "00:00:01"
+        }
+      }
+    ],
+    "Enrich": [
+      "FromLogContext",
+      "WithMachineName",
+      "WithProcessId",
+      "WithThreadId"
+    ],
+    "Properties": {
+      "ApplicationName": "Serilog.WebApplication"
+    }
+  }
+}
