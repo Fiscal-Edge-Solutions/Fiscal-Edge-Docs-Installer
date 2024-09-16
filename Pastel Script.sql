@@ -73,17 +73,17 @@ CREATE VIEW ZraStockMaster AS
 SELECT 
 	I.ItemCode AS ItemCode, 
 	I.Description AS Description,
-	COALESCE(NULLIF(I.UserdefText02, ''), '10101504') AS ItemClassificationCode, 
-	COALESCE(NULLIF(I.UnitSize, ''), 'EA') AS PackagingUnitCode, 
-	COALESCE(NULLIF(I.UserdefText01, ''), 'NO') AS QuantityUnitCode, 
+	COALESCE(NULLIF(RTRIM(I.UserdefText02), ''), '10101504') AS ItemClassificationCode, 
+	COALESCE(NULLIF(RTRIM(I.UnitSize), ''), 'EA') AS PackagingUnitCode, 
+	COALESCE(NULLIF(RTRIM(I.UserdefText01), ''), 'NO') AS QuantityUnitCode, 
 	St.OnHand as Quantity,
 	'A' AS TaxLabel,
-	COALESCE(NULLIF(I.CommodityCode, ''), 'ZM') AS OriginNationCode, 
+	COALESCE(NULLIF(RTRIM(I.CommodityCode), ''), 'ZM') AS OriginNationCode, 
 	CASE
 		WHEN I.Physical = 0 THEN '3'
 		ELSE '2'
 	END AS ItemTypeCode,
-	'000' AS BranchId
+	'002' AS BranchId
 FROM Inventory I
 LEFT JOIN vwStockOnHand St ON I.ItemCode = St.ItemCode
 WHERE I.Blocked = 0 AND St.StoreCode = ''
