@@ -83,7 +83,7 @@ SELECT
 		WHEN I.Physical = 0 THEN '3'
 		ELSE '2'
 	END AS ItemTypeCode,
-	'002' AS BranchId
+	'000' AS BranchId
 FROM Inventory I
 LEFT JOIN vwStockOnHand St ON I.ItemCode = St.ItemCode
 WHERE I.Blocked = 0 AND St.StoreCode = ''

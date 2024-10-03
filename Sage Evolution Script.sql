@@ -118,7 +118,7 @@ SELECT
 			CASE 
 				WHEN fQtyProcessedLineTotInclForeign IS NULL OR fQtyProcessedLineTotInclForeign = 0 THEN fQtyprocessedLineTotIncl 
 				ELSE fQtyProcessedLineTotInclForeign 
-			END / fQtyProcessed AS DECIMAL(20, 4)
+			END / fQtyProcessed AS DECIMAL(20, 8)
 		)
 	END AS "UnitPrice", 
 	--CASE
@@ -135,7 +135,7 @@ from [_btblInvoiceLines] It
 WITH (NOLOCK)
 LEFT JOIN _bvStockFull st ON st.StockID = It.iStockCodeID
 LEFT JOIN TaxRate Tr ON Tr.idTaxRate = It.iTaxTypeID
-WHERE iInvoiceID = @RefId AND It.iOrigLineID = 0 AND fQtyProcessed != 0
+WHERE iInvoiceID = @RefId AND It.iOrigLineID = 0 AND fQtyLastProcess != 0
 END
 
 
@@ -273,7 +273,7 @@ SELECT
 			CASE 
 				WHEN fQtyProcessedLineTotInclForeign IS NULL OR fQtyProcessedLineTotInclForeign = 0 THEN fQtyprocessedLineTotIncl 
 				ELSE fQtyProcessedLineTotInclForeign 
-			END / fQtyProcessed AS DECIMAL(20, 4)
+			END / fQtyProcessed AS DECIMAL(20, 8)
 		)
 	END AS "UnitPrice",  
 	CASE 
@@ -286,7 +286,7 @@ from [_btblInvoiceLines] It
 WITH (NOLOCK)
 LEFT JOIN _bvStockFull st ON st.StockID = It.iStockCodeID
 LEFT JOIN TaxRate Tr ON Tr.idTaxRate = It.iTaxTypeID
-WHERE iInvoiceID = @RefId AND It.iGrvLineID != 0
+WHERE iInvoiceID = @RefId AND It.iGrvLineID != 0 AND fQtyLastProcess != 0
 END
 GO
 
