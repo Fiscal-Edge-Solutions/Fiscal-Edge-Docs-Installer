@@ -44,6 +44,8 @@ SELECT TOP 5
     CASE -- Check the invoice type mapping and update accordingly
 		WHEN Inv.DocType = 0 THEN 'S'
 		WHEN Inv.DocType = 4 THEN 'S'
+		WHEN inv.DocType = 6 THEN 'S'
+		WHEN Inv.DocType = 7 THEN 'R'
 		WHEN inv.DocType = 1 THEN 'R'
 	END AS ReceiptTypeCode,
     Inv.cTaxNumber AS CustomerTpin,
@@ -61,7 +63,7 @@ LEFT JOIN (
         cDSMExtOrderNum
     FROM _bvInvNumARFull 
 	WITH (NOLOCK)
-    WHERE DocType IN (0,4,1) 
+    WHERE DocType IN (0,4,1,6,7) 
       AND DocState = 4 
       AND InvNumber != '' 
       AND InvNumber IS NOT NULL 
@@ -76,14 +78,14 @@ LEFT JOIN (
         ucIDSOrdZRALOCALPURCHASEORDER 
     FROM _bvInvNumARFull 
 	WITH (NOLOCK)
-    WHERE DocType IN (0,4,1) 
+    WHERE DocType IN (0,4,1,6,7) 
       AND DocState = 4 
       AND InvNumber != '' 
       AND InvNumber IS NOT NULL 
       AND InvDate > '2024-06-30 00:00:00'
 ) AS OrigInv2 ON Inv.AutoIndex = OrigInv2.AutoIndex
 LEFT JOIN FiscalInfo Fisc ON Inv.InvNumber = Fisc.InvoiceNumber
-WHERE Inv.DocType in (0,4,1) AND Inv.DocState = 4
+WHERE Inv.DocType in (0,4,1,6,7) AND Inv.DocState = 4
 AND Inv.InvDate > '2024-06-30 00:00:00'
 AND Inv.InvNumber != ''
 AND Inv.InvNumber IS NOT NULL
@@ -181,7 +183,7 @@ CREATE PROCEDURE [dbo].[UpdateFiscalDetails]
 AS
 BEGIN
     UPDATE InvNum
-    SET cDPOrdServiceTaskNo = @Signature, cDSOrdServiceTaskNo = @InternalData, cDSMExtOrderNum = @InvoiceSequence
+    SET cDPOrdServiceTaskNo = @Signature, cDSOrdServiceTaskNo = @InternalData, cDSMExtOrderNum = @InvoiceSequence, cHash = @QrCode
     WHERE InvNumber = @InvNumber;
 END;
 
