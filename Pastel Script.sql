@@ -30,7 +30,7 @@ SELECT TOP 1
     Header.DocumentNumber AS Id,
     Header.DocumentNumber AS InvoiceNumber,
     CASE 
-        WHEN Header.DocumentType = 4 THEN COALESCE(OrigInv.Message03, '0')
+        WHEN Header.DocumentType = 4 THEN COALESCE(NULLIF(RTRIM(OrigInv.Message03), ''), '0')
         ELSE '0'
     END AS OriginalNumber,
     'ZM' AS DestinationCountryCode,
