@@ -22,7 +22,7 @@ SELECT TOP 5
 	CAST(Inv.AutoIndex AS VARCHAR(20)) AS Id,
 	Inv.InvNumber AS InvoiceNumber,
 	CASE 
-        WHEN Inv.DocType = 1 THEN COALESCE(OrigInv.cDSMExtOrderNum, '0')
+        WHEN Inv.DocType IN (1,7) THEN COALESCE(OrigInv.cDSMExtOrderNum, '0')
         ELSE '0'
     END AS OriginalInvoiceNumber,
 	COALESCE(NULLIF(RTRIM(OrigInv2.ulIDSOrdDestinationCountryCode), ''), NULLIF(RTRIM(OrigInv2.ulIDInvDestinationCountryCode), ''), null) AS DestinationCountryCode,
