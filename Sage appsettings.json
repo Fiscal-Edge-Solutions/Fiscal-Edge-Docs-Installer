@@ -4,12 +4,14 @@
       "ConnectionString": "Server=tcp:localhost;Initial Catalog=test;Persist Security Info=False;User ID=test;Password=test;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;",
       "APIKey": "lVilgqBJq/NBseSSSjUYu0fsD40KFnCRQ3TSi+ZNj5g=",
       "TerminalId": "SDC0060000006",
-      "BranchId": "000"
+      "BranchId": "000",
+	  "Base64Image": false,
+	  "LineItemDelay ": 0
     }
   ],
 
   "AppConfigs": {
-    "AppUrl": "https://localhost:7210/zm/api/",
+    "AppUrl": "https://www.api.fiscaledge.net/zm/api/",
     "Pos": "pastel",
     "InvoiceFrequency": 5,
     "StockSync": true,
@@ -43,7 +45,7 @@
         "Args": {
           "path": "C:\\Home\\RawLogs\\fiscalize.txt",
           "rollingInterval": "Day",
-          "retainedFileCountLimit": "2",
+          "retainedFileCountLimit": "7",
           "shared": "true",
           "flushToDiskInterval": "00:00:01"
         }

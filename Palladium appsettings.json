@@ -6,7 +6,7 @@
       "TerminalId": "SDC0060000006",
       "BranchId": "000",
 	  "Base64Image": false,
-	  "PalladiumDelay": 5
+	  "LineItemDelay ": 2
     }
   ],
 
