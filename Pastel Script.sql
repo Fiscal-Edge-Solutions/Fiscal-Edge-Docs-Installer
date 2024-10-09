@@ -33,7 +33,7 @@ SELECT TOP 1
         WHEN Header.DocumentType = 4 THEN COALESCE(NULLIF(RTRIM(OrigInv.Message03), ''), '0')
         ELSE '0'
     END AS OriginalNumber,
-    'ZM' AS DestinationCountryCode,
+    COALESCE(NULLIF(RTRIM(Cust.UserDefined02)), 'ZM') AS DestinationCountryCode,
     Cust.UserDefined01 AS LocalPurchaseOrder,
     '000' AS BranchId,
     COALESCE(Acc.Description, 'ADMIN') AS IssuerName,
