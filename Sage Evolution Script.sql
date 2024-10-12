@@ -120,12 +120,9 @@ SELECT
 			CASE 
 				WHEN fQtyLastProcessLineTotInclForeign IS NULL OR fQtyLastProcessLineTotInclForeign = 0 THEN fQtyLastprocessLineTotIncl 
 				ELSE fQtyLastProcessLineTotInclForeign 
-			END / fQtyLastProcess AS DECIMAL(20, 4)
+			END / fQtyLastProcess AS DECIMAL(20, 8)
 		)
 	END AS "UnitPrice", 
-	--CASE
-	--WHEN fQuantity = 0 THEN 0
-	--ELSE CAST(fQuantityLineTotIncl/fQuantity AS DECIMAL(20,4)) END AS UnitPrice,
 	CASE 
 		WHEN fQtyLastProcessLineTotInclForeign != 0 THEN  CAST(fQtyLastProcessLineTotInclForeign AS DECIMAL(20, 4))
 		ELSE CAST(fQtyLastprocessLineTotIncl AS DECIMAL(20, 4)) 
@@ -269,13 +266,13 @@ SELECT
 	COALESCE(st.uliiPackagingUnitCode, 'NT') AS PackagingUnitCode,
 	COALESCE(st.ulIIQuantityUnitCode, 'NO') AS QuantityUnitCode,
 	0.0 AS DiscountAmount,
-CASE 
+	CASE 
 		WHEN fQtyLastProcess IS NULL OR fQtyLastProcess = 0 THEN 0
 		ELSE CAST(
 			CASE 
 				WHEN fQtyLastProcessLineTotInclForeign IS NULL OR fQtyLastProcessLineTotInclForeign = 0 THEN fQtyLastprocessLineTotIncl 
 				ELSE fQtyLastProcessLineTotInclForeign 
-			END / fQtyLastProcess AS DECIMAL(20, 4)
+			END / fQtyLastProcess AS DECIMAL(20, 8)
 		)
 	END AS "UnitPrice", 
 	CASE 
