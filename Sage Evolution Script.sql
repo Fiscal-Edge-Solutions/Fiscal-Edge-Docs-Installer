@@ -109,26 +109,26 @@ SELECT
 		WHEN (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID) IS NULL THEN 'URI'
 		ELSE (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID)
 		END AS ItemCode,
-	CAST(fQtyProcessed AS DECIMAL(20,4)) AS Quantity,
 	Tr.cFiscalTaxLabel AS TaxLabel,
 	COALESCE(st.uliiPackagingUnitCode, 'NT') AS PackagingUnitCode,
 	COALESCE(st.ulIIQuantityUnitCode, 'NO') AS QuantityUnitCode,
 	0.0 AS DiscountAmount,
+	CAST(fQtyLastProcess AS DECIMAL(20,4)) AS Quantity,
 	CASE 
-		WHEN fQuantity IS NULL OR fQtyProcessed = 0 THEN 0
+		WHEN fQtyLastProcess IS NULL OR fQtyLastProcess = 0 THEN 0
 		ELSE CAST(
 			CASE 
-				WHEN fQtyProcessedLineTotInclForeign IS NULL OR fQtyProcessedLineTotInclForeign = 0 THEN fQtyprocessedLineTotIncl 
-				ELSE fQtyProcessedLineTotInclForeign 
-			END / fQtyProcessed AS DECIMAL(20, 8)
+				WHEN fQtyLastProcessLineTotInclForeign IS NULL OR fQtyLastProcessLineTotInclForeign = 0 THEN fQtyLastprocessLineTotIncl 
+				ELSE fQtyLastProcessLineTotInclForeign 
+			END / fQtyLastProcess AS DECIMAL(20, 4)
 		)
 	END AS "UnitPrice", 
 	--CASE
 	--WHEN fQuantity = 0 THEN 0
 	--ELSE CAST(fQuantityLineTotIncl/fQuantity AS DECIMAL(20,4)) END AS UnitPrice,
 	CASE 
-		WHEN fQtyProcessedLineTotInclForeign != 0 THEN  CAST(fQtyProcessedLineTotInclForeign AS DECIMAL(20, 4))
-		ELSE CAST(fQtyprocessedLineTotIncl AS DECIMAL(20, 4)) 
+		WHEN fQtyLastProcessLineTotInclForeign != 0 THEN  CAST(fQtyLastProcessLineTotInclForeign AS DECIMAL(20, 4))
+		ELSE CAST(fQtyLastprocessLineTotIncl AS DECIMAL(20, 4)) 
 	END as "TotalAmount", 
 	--CAST(fQuantityLineTotIncl AS DECIMAL(20, 4))  AS TotalAmount,
 	1 as isTaxInclusive,
@@ -264,23 +264,23 @@ SELECT
 		WHEN (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID) IS NULL THEN 'URI'
 		ELSE (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID)
 	END AS ItemCode,
-	CAST(fQtyProcessed AS DECIMAL(20,4)) AS Quantity,
+	CAST(fQtyLastProcess AS DECIMAL(20,4)) AS Quantity,
 	Tr.cFiscalTaxLabel AS TaxLabel,
 	COALESCE(st.uliiPackagingUnitCode, 'NT') AS PackagingUnitCode,
 	COALESCE(st.ulIIQuantityUnitCode, 'NO') AS QuantityUnitCode,
 	0.0 AS DiscountAmount,
-	CASE 
-		WHEN fQuantity IS NULL OR fQtyProcessed = 0 THEN 0
+CASE 
+		WHEN fQtyLastProcess IS NULL OR fQtyLastProcess = 0 THEN 0
 		ELSE CAST(
 			CASE 
-				WHEN fQtyProcessedLineTotInclForeign IS NULL OR fQtyProcessedLineTotInclForeign = 0 THEN fQtyprocessedLineTotIncl 
-				ELSE fQtyProcessedLineTotInclForeign 
-			END / fQtyProcessed AS DECIMAL(20, 8)
+				WHEN fQtyLastProcessLineTotInclForeign IS NULL OR fQtyLastProcessLineTotInclForeign = 0 THEN fQtyLastprocessLineTotIncl 
+				ELSE fQtyLastProcessLineTotInclForeign 
+			END / fQtyLastProcess AS DECIMAL(20, 4)
 		)
-	END AS "UnitPrice",  
+	END AS "UnitPrice", 
 	CASE 
-		WHEN fQtyProcessedLineTotInclForeign != 0 THEN  CAST(fQtyProcessedLineTotInclForeign AS DECIMAL(20, 4))
-		ELSE CAST(fQtyprocessedLineTotIncl AS DECIMAL(20, 4)) 
+		WHEN fQtyLastProcessLineTotInclForeign != 0 THEN  CAST(fQtyLastProcessLineTotInclForeign AS DECIMAL(20, 4))
+		ELSE CAST(fQtyLastprocessLineTotIncl AS DECIMAL(20, 4)) 
 	END as "TotalAmount", 
 	1 as isTaxInclusive,
 	CAST(fRecommendedRetailPrice AS DECIMAL(20,4)) AS RRP
