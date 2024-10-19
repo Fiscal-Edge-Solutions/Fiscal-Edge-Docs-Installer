@@ -76,7 +76,7 @@ SELECT
 	COALESCE(NULLIF(RTRIM(I.UserdefText02), ''), '10101504') AS ItemClassificationCode, 
 	COALESCE(NULLIF(RTRIM(I.UnitSize), ''), 'EA') AS PackagingUnitCode, 
 	COALESCE(NULLIF(RTRIM(I.UserdefText01), ''), 'NO') AS QuantityUnitCode, 
-	St.OnHand as Quantity,
+	ROUND(St.OnHand, 4) AS Quantity,
 	'A' AS TaxLabel,
 	COALESCE(NULLIF(RTRIM(I.CommodityCode), ''), 'ZM') AS OriginNationCode, 
 	CASE
