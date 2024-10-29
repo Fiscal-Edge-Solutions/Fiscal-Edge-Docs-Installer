@@ -6,13 +6,14 @@
       "TerminalId": "SDC0060000006",
       "BranchId": "000",
 	  "Base64Image": false,
+	  "HasJobCard": false,
 	  "LineItemDelay ": 0
     }
   ],
 
   "AppConfigs": {
     "AppUrl": "https://www.api.fiscaledge.net/zm/api/",
-    "Pos": "pastel",
+    "Pos": "sqlserver",
     "InvoiceFrequency": 5,
     "StockSync": true,
     "StockFrequency": 1440,

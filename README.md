@@ -26,7 +26,7 @@ This repository contains installation guides, scripts, and installers related to
 2. Execute the [Sage Evolution Script.sql](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Sage%20Evolution%20Script.sql) script during the installation process as directed in the guide.
 
 ### General Installer
-- The [32_version_1.5.2.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_1.5.2.zip) file contains the general installer for version 1.5.2 of the software. Download and unzip the file to begin installation.
+- The [32_version_2.0.0.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_2.0.0.zip) file contains the general installer for version 1.5.2 of the software. Download and unzip the file to begin installation.
 
 ## Support
 
