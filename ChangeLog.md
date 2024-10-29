@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0] - 2024-10-29
+
+### Added
+- **Job Card Support**  
+  The application can support Job Card invoice fiscalization. This feature can be enabled by setting the `HasJobCard` parameter in the configuration file to `true`.
+
+
 ## [1.6.0] - 2024-10-05
 
 ### Added
