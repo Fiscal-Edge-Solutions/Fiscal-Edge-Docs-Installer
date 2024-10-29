@@ -288,5 +288,3 @@ LEFT JOIN TaxRate Tr ON Tr.idTaxRate = It.iTaxTypeID
 WHERE iInvoiceID = @RefId AND It.iGrvLineID != 0 AND fQtyLastProcess != 0
 END
 GO
-
-
