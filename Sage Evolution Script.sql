@@ -176,14 +176,14 @@ CREATE PROCEDURE [dbo].[UpdateFiscalDetails]
 	@InvoiceType NVARCHAR(255),
 	@InvoiceSequence NVARCHAR(255),
 	@QrCode NVARCHAR(255),
-	@VsdcDate NVARCHAR(255)
+	@VsdcDate NVARCHAR(255),
+	@IsJobCard INT
 AS
 BEGIN
     UPDATE InvNum
     SET cDPOrdServiceTaskNo = @Signature, cDSOrdServiceTaskNo = @InternalData, cDSMExtOrderNum = @InvoiceSequence, cHash = @QrCode
     WHERE InvNumber = @InvNumber;
 END;
-
 
 
 -----------------------------------------------------------

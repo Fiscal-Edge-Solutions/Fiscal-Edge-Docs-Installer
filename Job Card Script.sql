@@ -9,12 +9,12 @@ SELECT TOP 5
 	'000' AS BranchId,
     '01' AS PaymentTypeCode,
 	RepName AS IssuerName,
-	iRepID AS IssuerId,
+	CAST(iRepID AS VARCHAR(20)) AS IssuerId,
 	CASE -- Check the SAGE currency mapping and update this script accordingly. 
 		WHEN CurrencyCode IS NULL THEN 'ZMW'
 		ELSE CurrencyCode
 	END AS CurrencyType,
-	(SELECT TOP 1 fExchangeRate FROM [_btblJCInvoiceLines] WHERE iJobNumID = Inv.AutoIndex) AS "ConversionRate",
+	CAST((SELECT TOP 1 fExchangeRate FROM [_btblJCInvoiceLines] WHERE iJobNumID = Inv.AutoIndex) AS DECIMAL(20,4)) AS "ConversionRate",
     Inv.CustomerName AS CustomerName,
     Inv.CustomerName AS "BuyerTaxAccountName",
     'S' AS ReceiptTypeCode,
@@ -23,7 +23,8 @@ SELECT TOP 5
     NULL AS RefundReasonCode
 FROM [_bvJobNumFull] as Inv
 LEFT JOIN [_btblJCMaster] MS ON Inv.InvNumber = MS.cFinalInvoiceNo 
-WHERE inv.DocType = 1
+LEFT JOIN FiscalInfo Fisc ON Inv.InvNumber = Fisc.InvoiceNumber
+WHERE inv.DocType = 1 AND Fisc.InvoiceNumber IS NULL
 END
 GO
 
@@ -34,7 +35,7 @@ BEGIN
 SET NOCOUNT ON
 SELECT 
 	CAST(iJobNumID AS VARCHAR(50)) AS RefId,
-	ROW_NUMBER() OVER (ORDER BY [idJCInvoiceLines]) AS ItemSequenceNumber, 
+	CAST(ROW_NUMBER() OVER (ORDER BY [idJCInvoiceLines]) AS INT) AS ItemSequenceNumber, 
 	cDescription AS ItemDesc, 
 	COALESCE(st.ucIIUNSPSC, '10101504') AS ItemClassificationCode,
 	COALESCE(NULLIF(st.Code, ''), 'URI') AS ItemCode,
@@ -56,7 +57,6 @@ SELECT
 		WHEN fExchangeRate = 1 THEN  CAST(fLineTotIncl AS DECIMAL(20, 4))
 		ELSE CAST(fLineTotInclForeign AS DECIMAL(20, 4)) 
 	END as "TotalAmount", 
-	--CAST(fQuantityLineTotIncl AS DECIMAL(20, 4))  AS TotalAmount,
 	1 as isTaxInclusive,
 	0.0 AS RRP
 from [_btblJCInvoiceLines] It
@@ -66,3 +66,31 @@ LEFT JOIN TaxRate Tr ON Tr.idTaxRate = It.iTaxTypeID
 WHERE iJobNumID = @RefId AND fLineTotExcl != 0
 END
 GO
+
+
+ALTER PROCEDURE [dbo].[UpdateFiscalDetails]
+    @Signature NVARCHAR(255),
+    @InternalData NVARCHAR(255),
+	@InvNumber NVARCHAR(255),
+	@InvoiceType NVARCHAR(255),
+	@InvoiceSequence NVARCHAR(255),
+	@QrCode NVARCHAR(255),
+	@VsdcDate NVARCHAR(255),
+	@IsJobCard INT
+AS
+BEGIN
+	IF @IsJobCard = 0
+		BEGIN
+			UPDATE InvNum
+			SET cDPOrdServiceTaskNo = @Signature, cDSOrdServiceTaskNo = @InternalData, 
+			cDSMExtOrderNum = @InvoiceSequence, cHash = @QrCode
+			WHERE InvNumber = @InvNumber;
+		END
+	ELSE
+		BEGIN
+			UPDATE JobNum
+			SET Message1 = @Signature, Message2 = @InternalData, 
+			Message3 = @InvoiceSequence, cHash = @QrCode
+			WHERE InvNumber = @InvNumber;
+		END
+END;
