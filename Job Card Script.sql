@@ -1,4 +1,4 @@
-CREATE VIEW [dbo].[ZraPurchase] 
+CREATE VIEW [dbo].[ZraJobCardInvoice] 
 AS
 SELECT TOP 5
 	CAST(Inv.AutoIndex AS VARCHAR(20)) AS Id,
