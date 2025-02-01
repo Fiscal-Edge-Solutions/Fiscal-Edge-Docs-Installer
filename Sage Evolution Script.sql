@@ -22,7 +22,7 @@ SELECT TOP 5
 	CAST(Inv.AutoIndex AS VARCHAR(20)) AS Id,
 	Inv.InvNumber AS InvoiceNumber,
 	CASE 
-        WHEN Inv.DocType IN (1,7) THEN COALESCE(OrigInv.cDSMExtOrderNum, '0')
+        WHEN Inv.DocType IN (1,7) THEN COALESCE(Inv.DeliveryNote, '0')
         ELSE '0'
     END AS OriginalInvoiceNumber,
 	COALESCE(NULLIF(RTRIM(OrigInv2.ulIDSOrdDestinationCountryCode), ''), NULLIF(RTRIM(OrigInv2.ulIDInvDestinationCountryCode), ''), null) AS DestinationCountryCode,
@@ -57,18 +57,6 @@ SELECT TOP 5
 FROM [InvNum] as Inv
 WITH (NOLOCK)
 left JOIN Currency Curr on Curr.CurrencyLink = Inv.ForeignCurrencyID
-LEFT JOIN (
-    SELECT 
-		InvNumber,
-        cDSMExtOrderNum
-    FROM _bvInvNumARFull 
-	WITH (NOLOCK)
-    WHERE DocType IN (0,4,1,6,7) 
-      AND DocState = 4 
-      AND InvNumber != '' 
-      AND InvNumber IS NOT NULL 
-      AND InvDate > '2024-06-30 00:00:00'
-) AS OrigInv ON Inv.DeliveryNote = OrigInv.InvNumber
 LEFT JOIN (
     SELECT 
 		AutoIndex,

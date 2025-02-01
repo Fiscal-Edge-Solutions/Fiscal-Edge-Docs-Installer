@@ -30,7 +30,7 @@ SELECT TOP 1
     Header.DocumentNumber AS Id,
     Header.DocumentNumber AS InvoiceNumber,
     CASE 
-        WHEN Header.DocumentType = 4 THEN COALESCE(NULLIF(RTRIM(OrigInv.Message03), ''), '0')
+        WHEN Header.DocumentType = 4 THEN COALESCE(NULLIF(RTRIM(Header.OrderNumber), '0'), '0')
         ELSE '0'
     END AS OriginalNumber,
     COALESCE(NULLIF(RTRIM(Cust.UserDefined02), ''), 'ZM') AS DestinationCountryCode,
@@ -58,7 +58,6 @@ SELECT TOP 1
 FROM HistoryHeader Header
 LEFT JOIN CustomerMaster Cust ON Cust.CustomerCode = Header.CustomerCode
 LEFT JOIN AccountUser Acc ON Acc.ID = Header.UserID
-LEFT JOIN HistoryHeader OrigInv ON OrigInv.DocumentNumber = Header.OrderNumber AND Header.DocumentType = 4
 LEFT JOIN FiscalInfo FI ON Header.DocumentNumber = FI.InvoiceNumber
 WHERE Header.DocumentType IN (3, 4)
   AND Header.DocumentDate > '2024-08-01'  -- This acts as a cutoff. You want to set this date to the date the smart invoice was setup so that only invoices issued from that day get fiscalized.

@@ -1,11 +1,27 @@
 # Changelog
 
+## [2.1.2] - 2025-02-01
+
+### Added
+- **Mixed Mode Support**  
+  The application now supports mixed-mode usage, which is particularly useful in scenarios where both Pastel and Sage 200 are running on the same server. 
+
+- **Support for the new ZRA Invoice Number Format**  
+  The application and scripts have been updated to comply with the latest ZRA invoice number format recommendations.
+
+### Enhancements
+- **SQL Script Performance Optimization**  
+  The SQL scripts have been optimized to improve overall query performance, especially for databases with large datasets.
+
+### Fixed
+- **Missing Customer TPIN** 
+   This release addresses an issue that occasionally caused missing customer TPINs on transmitted invoices.
+
 ## [2.0.0] - 2024-10-29
 
 ### Added
 - **Job Card Support**  
   The application can support Job Card invoice fiscalization. This feature can be enabled by setting the `HasJobCard` parameter in the configuration file to `true`.
-
 
 ## [1.6.0] - 2024-10-05
 

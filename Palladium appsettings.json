@@ -5,6 +5,7 @@
       "APIKey": "lVilgqBJq/NBseSSSjUYu0fsD40KFnCRQ3TSi+ZNj5g=",
       "TerminalId": "SDC0060000006",
       "BranchId": "000",
+	  "Pos": "sqlserver",
 	  "Base64Image": false,
 	  "LineItemDelay ": 2
     }
@@ -12,7 +13,6 @@
 
   "AppConfigs": {
     "AppUrl": "https://www.api.fiscaledge.net/zm/api/",
-    "Pos": "pastel",
     "InvoiceFrequency": 5,
     "StockSync": true,
     "StockFrequency": 1440,
