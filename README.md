@@ -6,7 +6,7 @@ This repository contains installation guides, scripts, and installers related to
 
 ## Contents
 
-- **[32_version_2.0.0.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_2.0.0.zip)**: Installer package for version 2.0.0.
+- **[32_version_2.1.2.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_2.1.2.zip)**: Installer package for version 2.1.2.
 - **[Invoicing Rules.pdf](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Invoicing%20Rules.pdf)**: Contains an invoicing guide mandated by the ZRA to ensure compliance with Smart Invoice regulations. It is highly recommended for distribution to taxpayers.
 - **[Pastel Installation Guide.pdf](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Pastel%20Installation%20Guide.pdf)**: A detailed guide for installing Pastel software.
 - **[Pastel.sql](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Pastel.sql)**: SQL script related to the Pastel software.
@@ -26,7 +26,7 @@ This repository contains installation guides, scripts, and installers related to
 2. Execute the [Sage Evolution Script.sql](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/Sage%20Evolution%20Script.sql) script during the installation process as directed in the guide.
 
 ### General Installer
-- The [32_version_2.0.0.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_2.0.0.zip) file contains the general installer for version 1.5.2 of the software. Download and unzip the file to begin installation.
+- The [32_version_2.1.2.zip](https://github.com/ObinnaTerry/Fiscal-Edge-Docs-Installer/blob/main/32_version_2.1.2.zip) file contains the general installer for version 2.1.2 of the software. Download and unzip the file to begin installation.
 
 ## Support
 
