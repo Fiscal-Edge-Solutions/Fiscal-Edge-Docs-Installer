@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.0] - 2025-03-09
+
+### Added
+- **Pastel POS Integerated Support**  
+  The application now includes seamless integration with Sage Pastel for both Access and SQL Server databases. This enhancement allows invoices raised in Pastel POS to be fiscalized directly from the POS without waiting for synchronization with the backend. Additionally, Pastel POS templates can now be updated to include fiscal details without requiring invoices to be reprinted from the server.
+
+
+### Enhancements
+- **SQL Script Performance Optimization**  
+  General performance optimizations.
+
+
 ## [2.1.2] - 2025-02-01
 
 ### Added
