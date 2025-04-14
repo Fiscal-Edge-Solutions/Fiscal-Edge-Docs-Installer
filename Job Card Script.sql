@@ -24,7 +24,7 @@ SELECT TOP 5
 FROM [_bvJobNumFull] as Inv
 LEFT JOIN [_btblJCMaster] MS ON Inv.InvNumber = MS.cFinalInvoiceNo 
 LEFT JOIN FiscalInfo Fisc ON Inv.InvNumber = Fisc.InvoiceNumber
-WHERE inv.DocType = 1 AND Fisc.InvoiceNumber IS NULL
+WHERE inv.DocType = 1 AND Fisc.InvoiceNumber IS NULL AND Inv.InvDate > '2025-01-30 00:00:00'
 END
 GO
 
