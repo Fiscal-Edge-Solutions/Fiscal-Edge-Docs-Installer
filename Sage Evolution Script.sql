@@ -92,7 +92,7 @@ SELECT
 	CAST(iInvoiceID AS VARCHAR(50)) AS RefId,
 	iLineID AS ItemSequenceNumber, 
 	cDescription AS ItemDesc, 
-	COALESCE(st.ucIIUNSPSC, '10101504') AS ItemClassificationCode,
+	COALESCE(NULLIF(St.ucIIUNSPSC, ''), '10101504') AS ItemClassificationCode,
 	CASE 
 		WHEN (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID) IS NULL THEN 'URI'
 		ELSE (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID)
@@ -133,7 +133,7 @@ END
 CREATE VIEW [dbo].[ZraStockMaster] AS
 SELECT 
 	St.Code AS ITEMCODE,
-	COALESCE(St.ucIIUNSPSC, '10101504') AS ItemClassificationCode,
+	COALESCE(NULLIF(St.ucIIUNSPSC, ''), '10101504') AS ItemClassificationCode,
 	COALESCE(st.uliiPackagingUnitCode, 'NT') AS PackagingUnitCode,
 	COALESCE(st.ulIIQuantityUnitCode, 'NO') AS QuantityUnitCode,
 	CASE 
@@ -244,7 +244,7 @@ SELECT
 	CAST(iInvoiceID AS VARCHAR(50)) AS RefId,
 	iLineID AS ItemSequenceNumber, 
 	cDescription AS ItemDesc, 
-	COALESCE(st.ucIIUNSPSC, '10101504') AS ItemClassificationCode,
+	COALESCE(NULLIF(St.ucIIUNSPSC, ''), '10101504') AS ItemClassificationCode,
 	CASE 
 		WHEN (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID) IS NULL THEN 'URI'
 		ELSE (SELECT st.Code FROM _bvStockFull AS st WHERE st.StockID = It.iStockCodeID)
